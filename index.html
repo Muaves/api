@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - Muaves</title>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, system-ui, sans-serif;
+            background: #0d0d0d;
+            color: #d4d4d4;
+            line-height: 1.7;
+        }
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 260px;
+            background: #000;
+            border-right: 1px solid #1a1a1a;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .logo {
+            padding: 25px 20px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        .logo h1 {
+            font-size: 18px;
+            color: #00ff88;
+            font-weight: 600;
+        }
+        
+        .logo span {
+            color: #666;
+            font-size: 12px;
+        }
+        
+        .nav {
+            padding: 15px 0;
+        }
+        
+        .nav-section {
+            margin-bottom: 25px;
+        }
+        
+        .nav-label {
+            padding: 0 20px 8px;
+            color: #555;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .nav-link {
+            padding: 8px 20px;
+            color: #888;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-link:hover {
+            background: #0a0a0a;
+            color: #ccc;
+        }
+        
+        .nav-link.active {
+            background: #0f0f0f;
+            color: #00ff88;
+            border-left: 2px solid #00ff88;
+        }
+        
+        .tag {
+            font-size: 9px;
+            padding: 2px 5px;
+            border-radius: 2px;
+            font-weight: 600;
+        }
+        
+        .tag.get { background: #1a5fb4; color: white; }
+        .tag.post { background: #26a269; color: white; }
+        .tag.delete { background: #c01c28; color: white; }
+        
+        /* Main content */
+        .content {
+            flex: 1;
+            margin-left: 260px;
+            padding: 50px 70px;
+            max-width: 1100px;
+        }
+        
+        .section {
+            margin-bottom: 70px;
+        }
+        
+        h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+        
+        h2 {
+            font-size: 26px;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        h3 {
+            font-size: 18px;
+            margin: 30px 0 12px;
+            color: #00ff88;
+            font-weight: 600;
+        }
+        
+        p {
+            color: #999;
+            margin-bottom: 18px;
+            font-size: 14px;
+        }
+        
+        .intro {
+            color: #888;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 3px 9px;
+            background: #1a1a1a;
+            border: 1px solid #2a2a2a;
+            border-radius: 3px;
+            color: #00ff88;
+            font-size: 11px;
+            margin-right: 6px;
+        }
+        
+        /* Code blocks */
+        .code-block {
+            margin: 20px 0;
+        }
+        
+        .code-header {
+            background: #0a0a0a;
+            padding: 10px 16px;
+            border: 1px solid #1a1a1a;
+            border-radius: 6px 6px 0 0;
+            border-bottom: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .code-label {
+            color: #555;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+        
+        .copy {
+            background: none;
+            border: 1px solid #2a2a2a;
+            color: #777;
+            padding: 4px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .copy:hover {
+            background: #1a1a1a;
+            color: #00ff88;
+            border-color: #00ff88;
+        }
+        
+        pre {
+            background: #000;
+            border: 1px solid #1a1a1a;
+            border-radius: 0 0 6px 6px;
+            padding: 18px;
+            overflow-x: auto;
+            margin: 0;
+        }
+        
+        code {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            color: #ccc;
+            line-height: 1.6;
+        }
+        
+        /* Endpoint header */
+        .endpoint {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        .method {
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 11px;
+        }
+        
+        .method.get { background: #1a5fb4; color: white; }
+        .method.post { background: #26a269; color: white; }
+        .method.delete { background: #c01c28; color: white; }
+        
+        .path {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            color: #ddd;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+        
+        th, td {
+            padding: 10px 12px;
+            text-align: left;
+            border-bottom: 1px solid #1a1a1a;
+        }
+        
+        th {
+            color: #00ff88;
+            font-weight: 600;
+            font-size: 12px;
+        }
+        
+        td {
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .param {
+            color: #ccc;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+        }
+        
+        .req {
+            color: #c01c28;
+            font-size: 10px;
+            margin-left: 4px;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <h1>Muaves API</h1>
+                <span>v1.0.4</span>
+            </div>
+            
+            <div class="nav">
+                <div class="nav-section">
+                    <div class="nav-label">Basics</div>
+                    <div class="nav-link active" onclick="scrollTo('intro')">Introduction</div>
+                    <div class="nav-link" onclick="scrollTo('auth')">Authentication</div>
+                    <div class="nav-link" onclick="scrollTo('limits')">Rate Limits</div>
+                </div>
+                
+                <div class="nav-section">
+                    <div class="nav-label">API Reference</div>
+                    <div class="nav-link" onclick="scrollTo('get-projects')">
+                        <span>Get all projects</span>
+                        <span class="tag get">GET</span>
+                    </div>
+                    <div class="nav-link" onclick="scrollTo('get-project')">
+                        <span>Get single project</span>
+                        <span class="tag get">GET</span>
+                    </div>
+                    <div class="nav-link" onclick="scrollTo('get-links')">
+                        <span>Get links</span>
+                        <span class="tag get">GET</span>
+                    </div>
+                    <div class="nav-link" onclick="scrollTo('get-stats')">
+                        <span>Get stats</span>
+                        <span class="tag get">GET</span>
+                    </div>
+                    <div class="nav-link" onclick="scrollTo('search')">
+                        <span>Search projects</span>
+                        <span class="tag get">GET</span>
+                    </div>
+                    <div class="nav-link" onclick="scrollTo('create')">
+                        <span>Create project</span>
+                        <span class="tag post">POST</span>
+                    </div>
+                    <div class="nav-link" onclick="scrollTo('delete')">
+                        <span>Delete project</span>
+                        <span class="tag delete">DEL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+            <!-- Intro -->
+            <div id="intro" class="section">
+                <h1>API Documentation</h1>
+                <p class="intro">
+                    Hey! This is the API for my portfolio. It's pretty straightforward - you can grab project data, 
+                    search through stuff, and if you're me (with auth), add or delete projects. Everything returns JSON.
+                </p>
+                <div>
+                    <span class="badge">REST</span>
+                    <span class="badge">JSON</span>
+                    <span class="badge">Rate limited</span>
+                </div>
+                
+                <h3>Base URL</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Endpoint</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>https://muaves-portfolio-api.onrender.com</code></pre>
+                </div>
+            </div>
+
+            <!-- Auth -->
+            <div id="auth" class="section">
+                <h2>Authentication</h2>
+                <p>
+                    Most endpoints are public - just hit them and get data. But if you want to create or delete stuff, 
+                    you'll need to include an auth hash in your headers. That's just for admin stuff though.
+                </p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Header</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>X-Auth-Hash: your-auth-hash-here</code></pre>
+                </div>
+            </div>
+
+            <!-- Rate limits -->
+            <div id="limits" class="section">
+                <h2>Rate Limits</h2>
+                <p>
+                    Don't spam the API. You get 100 requests per hour per IP. If you go over, you'll get a 429 error. 
+                    Should be plenty for normal use.
+                </p>
+            </div>
+
+            <!-- Get all projects -->
+            <div id="get-projects" class="section">
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/projects</span>
+                </div>
+                
+                <p>Returns all my projects as an array. Pretty simple.</p>
+                
+                <h3>Example</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Request</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>curl https://muaves-portfolio-api.onrender.com/api/projects</code></pre>
+                </div>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Response</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>[
+  {
+    "name": "Redstone Launcher",
+    "description": "The best launcher currently on the entire planet!",
+    "tech": "HTML, CSS, JS, Node.js",
+    "status": "Completed"
+  },
+  {
+    "name": "ProTiers",
+    "description": "Uhm smth with tiers",
+    "tech": "JavaScript, WebServer, HTML, CSS",
+    "status": "Completed"
+  }
+]</code></pre>
+                </div>
+            </div>
+
+            <!-- Get single project -->
+            <div id="get-project" class="section">
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/projects/{id}</span>
+                </div>
+                
+                <p>Get one specific project by its ID. IDs start at 1.</p>
+                
+                <h3>Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="param">id</span><span class="req">required</span></td>
+                            <td>integer</td>
+                            <td>The project ID (starts at 1)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Example</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>curl https://muaves-portfolio-api.onrender.com/api/projects/1</code></pre>
+                </div>
+            </div>
+
+            <!-- Get links -->
+            <div id="get-links" class="section">
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/links</span>
+                </div>
+                
+                <p>Returns my external links - GitHub, projects, that kinda stuff.</p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Response</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>[
+  {
+    "name": "GitHub Profile",
+    "url": "https://github.com/muaves"
+  },
+  {
+    "name": "LSZSZV",
+    "url": "https://muaves.github.io/lszszv"
+  }
+]</code></pre>
+                </div>
+            </div>
+
+            <!-- Get stats -->
+            <div id="get-stats" class="section">
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/stats</span>
+                </div>
+                
+                <p>
+                    Get some stats about the portfolio - how many projects, visitors, top viewed stuff, etc. 
+                    Nothing too crazy.
+                </p>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Response</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>{
+  "total_projects": 5,
+  "total_links": 5,
+  "version": "1.0.4",
+  "total_visits": 127,
+  "last_visit": "2025-02-15T12:45:00",
+  "most_viewed_projects": []
+}</code></pre>
+                </div>
+            </div>
+
+            <!-- Search -->
+            <div id="search" class="section">
+                <div class="endpoint">
+                    <span class="method get">GET</span>
+                    <span class="path">/api/search</span>
+                </div>
+                
+                <p>Search through projects by name, description, or tech used.</p>
+                
+                <h3>Query Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="param">q</span><span class="req">required</span></td>
+                            <td>string</td>
+                            <td>What you want to search for</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Example</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>curl https://muaves-portfolio-api.onrender.com/api/search?q=launcher</code></pre>
+                </div>
+            </div>
+
+            <!-- Create project -->
+            <div id="create" class="section">
+                <div class="endpoint">
+                    <span class="method post">POST</span>
+                    <span class="path">/api/projects</span>
+                </div>
+                
+                <p>Create a new project. You need auth for this one.</p>
+                
+                <h3>Request Body</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Field</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="param">name</span><span class="req">required</span></td>
+                            <td>string</td>
+                            <td>Project name</td>
+                        </tr>
+                        <tr>
+                            <td><span class="param">description</span><span class="req">required</span></td>
+                            <td>string</td>
+                            <td>What the project does</td>
+                        </tr>
+                        <tr>
+                            <td><span class="param">tech</span><span class="req">required</span></td>
+                            <td>string</td>
+                            <td>Tech stack used</td>
+                        </tr>
+                        <tr>
+                            <td><span class="param">status</span><span class="req">required</span></td>
+                            <td>string</td>
+                            <td>Completed, In Progress, etc.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Example</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -X POST https://muaves-portfolio-api.onrender.com/api/projects \
+  -H "Content-Type: application/json" \
+  -H "X-Auth-Hash: your-hash" \
+  -d '{
+    "name": "Cool New Project",
+    "description": "Does something awesome",
+    "tech": "Python, Flask",
+    "status": "In Progress"
+  }'</code></pre>
+                </div>
+            </div>
+
+            <!-- Delete project -->
+            <div id="delete" class="section">
+                <div class="endpoint">
+                    <span class="method delete">DELETE</span>
+                    <span class="path">/api/projects/{id}</span>
+                </div>
+                
+                <p>Delete a project. Also needs auth. Be careful with this one.</p>
+                
+                <h3>Parameters</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="param">id</span><span class="req">required</span></td>
+                            <td>integer</td>
+                            <td>ID of the project to delete</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-label">Example</span>
+                        <button class="copy" onclick="copy(this)">Copy</button>
+                    </div>
+                    <pre><code>curl -X DELETE https://muaves-portfolio-api.onrender.com/api/projects/1 \
+  -H "X-Auth-Hash: your-hash"</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollTo(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                event.target.classList.add('active');
+            }
+        }
+        
+        function copy(btn) {
+            const code = btn.closest('.code-block').querySelector('code').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 1500);
+            });
+        }
+    </script>
+</body>
+</html>
