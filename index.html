@@ -24,7 +24,6 @@
             min-height: 100vh;
         }
         
-        /* Sidebar */
         .sidebar {
             width: 260px;
             background: #000;
@@ -99,7 +98,6 @@
         .tag.post { background: #26a269; color: white; }
         .tag.delete { background: #c01c28; color: white; }
         
-        /* Main content */
         .content {
             flex: 1;
             margin-left: 260px;
@@ -171,7 +169,6 @@
             font-size: 12px;
         }
         
-        /* Code blocks */
         .code-block {
             margin: 20px 0;
         }
@@ -225,7 +222,6 @@
             line-height: 1.6;
         }
         
-        /* Endpoint header */
         .endpoint {
             display: flex;
             align-items: center;
@@ -252,7 +248,6 @@
             color: #ddd;
         }
         
-        /* Tables */
         table {
             width: 100%;
             border-collapse: collapse;
@@ -305,7 +300,6 @@
 </head>
 <body>
     <div class="container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="logo">
                 <h1>Muaves API</h1>
@@ -377,6 +371,30 @@
                 </div>
             </div>
 
+            <div id="auth" class="section">
+                <h2>Authentication</h2>
+                <p>
+                    Most endpoints are public - just hit them and get data. But if you want to create or delete stuff, 
+                    you'll need to include an auth hash in your headers. That's just for admin stuff though.
+                </p>
+                
+                <h3>Getting the Auth Hash</h3>
+                <p>
+                    The auth hash is generated from your password + secret key. Here's how you get it:
+                </p>
+                
+                <p><strong>Default credentials:</strong></p>
+                <ul>
+                    <li>Password: <code>admin123</code></li>
+                    <li>Secret Key: <code>mysecret456</code></li>
+                </ul>
+                
+                <p>
+                    When you log into <code style="color: #00ff88;">/admin.html</code>, it automatically generates 
+                    the hash for you. But if you need it for API calls, check the browser console after logging in, 
+                    or use the admin panel to make changes (which handles auth automatically).
+                </p>
+                
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-label">Header</span>
@@ -673,7 +691,7 @@
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                const scrollPosition = window.pageYOffset + 100; // offset for better UX
+                const scrollPosition = window.pageYOffset + 100; 
                 
                 if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                     currentSection = section.getAttribute('id');
