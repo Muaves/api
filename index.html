@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Documentation - Muaves</title>
-    
+    <title>Muaves - API Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Muaves's API Documentation" />
+    <meta property="og:image" content="https://github.com/Muaves/muaves.github.io/blob/main/img/fav_cat.png?raw=true" />
+    <meta property="og:description"
+        content="My API Documentation page, here you can view all my API endpoints and their usage(s)." />
+    <meta name="theme-color" content="#c644af">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="shortcut icon"
+        href="https://raw.githubusercontent.com/Muaves/muaves.github.io/refs/heads/main/img/GBRR%20-%20PAGE.ico"
+        type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: -apple-system, system-ui, sans-serif;
             background: #0d0d0d;
             color: #d4d4d4;
             line-height: 1.7;
         }
-        
+
         .container {
             display: flex;
             min-height: 100vh;
         }
-        
+
         .sidebar {
             width: 260px;
             background: #000;
@@ -32,31 +44,31 @@
             height: 100vh;
             overflow-y: auto;
         }
-        
+
         .logo {
             padding: 25px 20px;
             border-bottom: 1px solid #1a1a1a;
         }
-        
+
         .logo h1 {
             font-size: 18px;
             color: #00ff88;
             font-weight: 600;
         }
-        
+
         .logo span {
             color: #666;
             font-size: 12px;
         }
-        
+
         .nav {
             padding: 15px 0;
         }
-        
+
         .nav-section {
             margin-bottom: 25px;
         }
-        
+
         .nav-label {
             padding: 0 20px 8px;
             color: #555;
@@ -64,7 +76,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        
+
         .nav-link {
             padding: 8px 20px;
             color: #888;
@@ -75,72 +87,83 @@
             align-items: center;
             transition: all 0.2s;
         }
-        
+
         .nav-link:hover {
             background: #0a0a0a;
             color: #ccc;
         }
-        
+
         .nav-link.active {
             background: #0f0f0f;
             color: #00ff88;
             border-left: 2px solid #00ff88;
         }
-        
+
         .tag {
             font-size: 9px;
             padding: 2px 5px;
             border-radius: 2px;
             font-weight: 600;
         }
-        
-        .tag.get { background: #1a5fb4; color: white; }
-        .tag.post { background: #26a269; color: white; }
-        .tag.delete { background: #c01c28; color: white; }
-        
+
+        .tag.get {
+            background: #1a5fb4;
+            color: white;
+        }
+
+        .tag.post {
+            background: #26a269;
+            color: white;
+        }
+
+        .tag.delete {
+            background: #c01c28;
+            color: white;
+        }
+
         .content {
             flex: 1;
             margin-left: 260px;
             padding: 50px 70px;
             max-width: 1100px;
         }
-        
+
         .section {
             margin-bottom: 70px;
             scroll-margin-top: 20px;
         }
-        
+
         h1 {
             font-size: 32px;
             margin-bottom: 8px;
             font-weight: 700;
         }
-        
+
         h2 {
             font-size: 26px;
             margin-bottom: 12px;
             font-weight: 600;
         }
-        
+
         h3 {
             font-size: 18px;
             margin: 30px 0 12px;
             color: #00ff88;
             font-weight: 600;
         }
-        
+
         p {
             color: #999;
             margin-bottom: 18px;
             font-size: 14px;
         }
-        
+
         .intro {
             color: #888;
             font-size: 15px;
             line-height: 1.8;
         }
-        
+
         .badge {
             display: inline-block;
             padding: 3px 9px;
@@ -151,16 +174,16 @@
             font-size: 11px;
             margin-right: 6px;
         }
-        
+
         ul {
             margin: 10px 0 15px 20px;
         }
-        
+
         ul li {
             color: #888;
             margin: 5px 0;
         }
-        
+
         ul li code {
             color: #00ff88;
             background: #1a1a1a;
@@ -168,11 +191,11 @@
             border-radius: 3px;
             font-size: 12px;
         }
-        
+
         .code-block {
             margin: 20px 0;
         }
-        
+
         .code-header {
             background: #0a0a0a;
             padding: 10px 16px;
@@ -183,13 +206,13 @@
             justify-content: space-between;
             align-items: center;
         }
-        
+
         .code-label {
             color: #555;
             font-size: 11px;
             text-transform: uppercase;
         }
-        
+
         .copy {
             background: none;
             border: 1px solid #2a2a2a;
@@ -199,13 +222,13 @@
             cursor: pointer;
             font-size: 11px;
         }
-        
+
         .copy:hover {
             background: #1a1a1a;
             color: #00ff88;
             border-color: #00ff88;
         }
-        
+
         pre {
             background: #000;
             border: 1px solid #1a1a1a;
@@ -214,14 +237,14 @@
             overflow-x: auto;
             margin: 0;
         }
-        
+
         code {
             font-family: 'Courier New', monospace;
             font-size: 13px;
             color: #ccc;
             line-height: 1.6;
         }
-        
+
         .endpoint {
             display: flex;
             align-items: center;
@@ -230,74 +253,236 @@
             padding-bottom: 16px;
             border-bottom: 1px solid #1a1a1a;
         }
-        
+
         .method {
             padding: 5px 10px;
             border-radius: 4px;
             font-weight: 600;
             font-size: 11px;
         }
-        
-        .method.get { background: #1a5fb4; color: white; }
-        .method.post { background: #26a269; color: white; }
-        .method.delete { background: #c01c28; color: white; }
-        
+
+        .method.get {
+            background: #1a5fb4;
+            color: white;
+        }
+
+        .method.post {
+            background: #26a269;
+            color: white;
+        }
+
+        .method.delete {
+            background: #c01c28;
+            color: white;
+        }
+
         .path {
             font-family: 'Courier New', monospace;
             font-size: 16px;
             color: #ddd;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 16px 0;
         }
-        
-        th, td {
+
+        th,
+        td {
             padding: 10px 12px;
             text-align: left;
             border-bottom: 1px solid #1a1a1a;
         }
-        
+
         th {
             color: #00ff88;
             font-weight: 600;
             font-size: 12px;
         }
-        
+
         td {
             color: #888;
             font-size: 13px;
         }
-        
+
         .param {
             color: #ccc;
             font-family: 'Courier New', monospace;
             font-size: 13px;
         }
-        
+
         .req {
             color: #c01c28;
             font-size: 10px;
             margin-left: 4px;
         }
-        
+
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
-        
+
         ::-webkit-scrollbar-track {
             background: #000;
         }
-        
+
         ::-webkit-scrollbar-thumb {
             background: #2a2a2a;
             border-radius: 4px;
         }
     </style>
+    <style>
+        .main-content {
+            padding: 2rem;
+        }
+
+
+        .footer-classic {
+            background-color: var(--footer-bg);
+            color: var(--footer-text-color);
+            padding: 3rem 1.5rem;
+        }
+
+        .footer-classic__container {
+            max-width: 1140px;
+            margin: 0 auto;
+        }
+
+        .footer-classic a {
+            color: var(--footer-link-color);
+            text-decoration: none;
+            transition: color 0.2s ease-in-out;
+        }
+
+        .footer-classic a:hover {
+            color: var(--footer-link-hover-color);
+            text-decoration: underline;
+        }
+
+        .footer-classic__brand .logo:hover {
+            text-decoration: none;
+        }
+
+        .footer-classic__main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--footer-border-color);
+        }
+
+        .footer-classic__brand .logo {
+            display: block;
+            width: 150px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-classic__brand .logo path {
+            fill: var(--footer-heading-color);
+            transition: fill 0.2s ease-in-out;
+        }
+
+        .footer-classic__brand .logo:hover path {
+            fill: var(--footer-link-hover-color);
+        }
+
+        .footer-classic__brand p {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        .footer-classic__heading {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--footer-heading-color);
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        .footer-classic__links ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .footer-classic__links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-classic__bottom {
+            padding-top: 2rem;
+            font-size: 0.875rem;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .footer-classic__copyright {
+            margin: 0;
+        }
+
+        .footer-classic__social ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .footer-classic__social a:hover {
+            text-decoration: none;
+        }
+
+        .footer-classic__social svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+
+        @media (min-width: 768px) {
+            .footer-classic__main {
+                grid-template-columns: 2fr 1fr 1fr;
+                gap: 3rem;
+            }
+
+            .footer-classic__bottom {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+
+        .big_footer_wrapper {
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            height: auto;
+            margin-top: -2vw;
+        }
+
+        .big_footer {
+            font-size: 24vw;
+            color: #fffdfd;
+            text-align: center;
+            line-height: 1.25;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            white-space: nowrap;
+            user-select: none;
+            transform: translateY(15%);
+            margin-left: 235px;
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
         <div class="sidebar">
@@ -305,7 +490,7 @@
                 <h1>Muaves API</h1>
                 <span>v1.0.4</span>
             </div>
-            
+
             <div class="nav">
                 <div class="nav-section">
                     <div class="nav-label">Basics</div>
@@ -313,7 +498,7 @@
                     <div class="nav-link" data-section="auth">Authentication</div>
                     <div class="nav-link" data-section="limits">Rate Limits</div>
                 </div>
-                
+
                 <div class="nav-section">
                     <div class="nav-label">API Reference</div>
                     <div class="nav-link" data-section="get-projects">
@@ -352,7 +537,7 @@
             <div id="intro" class="section">
                 <h1>API Documentation</h1>
                 <p class="intro">
-                    Hey! This is the API for my portfolio. It's pretty straightforward - you can grab project data, 
+                    Hey! This is the API for my portfolio. It's pretty straightforward - you can grab project data,
                     search through stuff, and if you're me (with auth), add or delete projects. Everything returns JSON.
                 </p>
                 <div>
@@ -360,7 +545,7 @@
                     <span class="badge">JSON</span>
                     <span class="badge">Rate limited</span>
                 </div>
-                
+
                 <h3>Base URL</h3>
                 <div class="code-block">
                     <div class="code-header">
@@ -374,27 +559,27 @@
             <div id="auth" class="section">
                 <h2>Authentication</h2>
                 <p>
-                    Most endpoints are public - just hit them and get data. But if you want to create or delete stuff, 
+                    Most endpoints are public - just hit them and get data. But if you want to create or delete stuff,
                     you'll need to include an auth hash in your headers. That's just for admin stuff though.
                 </p>
-                
+
                 <h3>Getting the Auth Hash</h3>
                 <p>
                     The auth hash is generated from your password + secret key. Here's how you get it:
                 </p>
-                
+
                 <p><strong>Default credentials:</strong></p>
                 <ul>
                     <li>Password: <code>admin123</code></li>
                     <li>Secret Key: <code>mysecret456</code></li>
                 </ul>
-                
+
                 <p>
-                    When you log into <code style="color: #00ff88;">/admin.html</code>, it automatically generates 
-                    the hash for you. But if you need it for API calls, check the browser console after logging in, 
+                    When you log into <code style="color: #00ff88;">/admin.html</code>, it automatically generates
+                    the hash for you. But if you need it for API calls, check the browser console after logging in,
                     or use the admin panel to make changes (which handles auth automatically).
                 </p>
-                
+
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-label">Header</span>
@@ -407,7 +592,7 @@
             <div id="limits" class="section">
                 <h2>Rate Limits</h2>
                 <p>
-                    Don't spam the API. You get 100 requests per hour per IP. If you go over, you'll get a 429 error. 
+                    Don't spam the API. You get 100 requests per hour per IP. If you go over, you'll get a 429 error.
                     Should be plenty for normal use.
                 </p>
             </div>
@@ -417,9 +602,9 @@
                     <span class="method get">GET</span>
                     <span class="path">/api/projects</span>
                 </div>
-                
+
                 <p>Returns all my projects as an array. Pretty simple.</p>
-                
+
                 <h3>Example</h3>
                 <div class="code-block">
                     <div class="code-header">
@@ -428,7 +613,7 @@
                     </div>
                     <pre><code>curl https://muaves-portfolio-api.onrender.com/api/projects</code></pre>
                 </div>
-                
+
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-label">Response</span>
@@ -456,9 +641,9 @@
                     <span class="method get">GET</span>
                     <span class="path">/api/projects/{id}</span>
                 </div>
-                
+
                 <p>Get one specific project by its ID. IDs start at 1.</p>
-                
+
                 <h3>Parameters</h3>
                 <table>
                     <thead>
@@ -476,7 +661,7 @@
                         </tr>
                     </tbody>
                 </table>
-                
+
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-label">Example</span>
@@ -491,9 +676,9 @@
                     <span class="method get">GET</span>
                     <span class="path">/api/links</span>
                 </div>
-                
+
                 <p>Returns my external links - GitHub, projects, that kinda stuff.</p>
-                
+
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-label">Response</span>
@@ -517,12 +702,12 @@
                     <span class="method get">GET</span>
                     <span class="path">/api/stats</span>
                 </div>
-                
+
                 <p>
-                    Get some stats about the portfolio - how many projects, visitors, top viewed stuff, etc. 
+                    Get some stats about the portfolio - how many projects, visitors, top viewed stuff, etc.
                     Nothing too crazy.
                 </p>
-                
+
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-label">Response</span>
@@ -544,9 +729,9 @@
                     <span class="method get">GET</span>
                     <span class="path">/api/search</span>
                 </div>
-                
+
                 <p>Search through projects by name, description, or tech used.</p>
-                
+
                 <h3>Query Parameters</h3>
                 <table>
                     <thead>
@@ -564,7 +749,7 @@
                         </tr>
                     </tbody>
                 </table>
-                
+
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-label">Example</span>
@@ -579,9 +764,9 @@
                     <span class="method post">POST</span>
                     <span class="path">/api/projects</span>
                 </div>
-                
+
                 <p>Create a new project. You need auth for this one.</p>
-                
+
                 <h3>Request Body</h3>
                 <table>
                     <thead>
@@ -614,7 +799,7 @@
                         </tr>
                     </tbody>
                 </table>
-                
+
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-label">Example</span>
@@ -637,9 +822,9 @@
                     <span class="method delete">DELETE</span>
                     <span class="path">/api/projects/{id}</span>
                 </div>
-                
+
                 <p>Delete a project. Also needs auth. Be careful with this one.</p>
-                
+
                 <h3>Parameters</h3>
                 <table>
                     <thead>
@@ -657,7 +842,7 @@
                         </tr>
                     </tbody>
                 </table>
-                
+
                 <div class="code-block">
                     <div class="code-header">
                         <span class="code-label">Example</span>
@@ -672,32 +857,32 @@
 
     <script>
         document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function () {
                 const sectionId = this.getAttribute('data-section');
                 const section = document.getElementById(sectionId);
-                
+
                 if (section) {
                     section.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
-        
+
         function updateActiveNav() {
             const sections = document.querySelectorAll('.section');
             const navLinks = document.querySelectorAll('.nav-link');
-            
+
             let currentSection = '';
-            
+
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
                 const sectionHeight = section.clientHeight;
-                const scrollPosition = window.pageYOffset + 100; 
-                
+                const scrollPosition = window.pageYOffset + 100;
+
                 if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
                     currentSection = section.getAttribute('id');
                 }
             });
-            
+
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('data-section') === currentSection) {
@@ -705,11 +890,11 @@
                 }
             });
         }
-        
+
         window.addEventListener('scroll', updateActiveNav);
-        
+
         window.addEventListener('load', updateActiveNav);
-        
+
         function copy(btn) {
             const code = btn.closest('.code-block').querySelector('code').textContent;
             navigator.clipboard.writeText(code).then(() => {
@@ -718,5 +903,56 @@
             });
         }
     </script>
+    <footer class="footer-classic" role="contentinfo">
+        <div class="footer-classic__container">
+            <div class="footer-classic__main">
+
+                <div class="footer-classic__brand">
+                    <a href="https://muaves.com" class="logo">
+                        <h1 style="text-align: center;">Muaves</h1>
+                        </svg>
+                    </a>
+                    <p>
+                        Hey! i'm Muaves, and i write code. mostly web stuff - html, css, javascript, that whole thing.
+                        been doing this for a while now and honestly? still love it.
+                    </p>
+                </div>
+
+                <div class="footer-classic__links">
+                    <h3 class="footer-classic__heading">About</h3>
+                    <ul>
+                        <li><a href="https://github.com/muaves">Github</a></li>
+                        <li><a href="https://muaves.com">Main Page</a></li>
+                        <li><a href="https://muaves.com/portfolio-api">Projects</a></li>
+                        <li><a href="https://redstone-launcher.com">Redstone Launcher</a></li>
+                        <li><a href="https://discord.com/users/1198173046196944962">Contact me</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-classic__links">
+                    <h3 class="footer-classic__heading">Resources</h3>
+                    <ul>
+                        <li><a href="pp/blog.html">Blog</a></li>
+                        <li><a href="pp/help_center.html">Help Center / FAQ</a></li>
+                        <li><a href="pp/press_kit.html">Templates</a></li>
+                        <li><a href="pp/case_studies.html">More projects</a></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="footer-classic__bottom">
+
+                <p class="footer-classic__copyright">
+                    © 2026 Muaves <a href="pp/privacy_policy.html">Privacy Policy</a> | <a
+                        href="pp/terms_of_service.html">Terms of Service</a>
+                </p>
+
+            </div>
+        </div>
+    </footer>
+    <div class="big_footer_wrapper">
+        <h1 class="big_footer">Muaves</h1>
+    </div>
 </body>
+
 </html>
