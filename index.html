@@ -25,9 +25,9 @@
         }
 
         body {
-            font-family: -apple-system, system-ui, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             background: #0d0d0d;
-            color: #d4d4d4;
+            color: #f5ecec;
             line-height: 1.7;
         }
 
@@ -52,7 +52,7 @@
 
         .logo h1 {
             font-size: 18px;
-            color: #00ff88;
+            color: #e4f2eb;
             font-weight: 600;
         }
 
@@ -552,7 +552,7 @@
                         <span class="code-label">Endpoint</span>
                         <button class="copy" onclick="copy(this)">Copy</button>
                     </div>
-                    <pre><code>https://muaves-portfolio-api.onrender.com</code></pre>
+                    <pre><code>https://core.muaves.com</code></pre>
                 </div>
             </div>
 
@@ -571,11 +571,11 @@
                 <p><strong>Default credentials:</strong></p>
                 <ul>
                     <li>Password: <code>admin123</code></li>
-                    <li>Secret Key: <code>mysecret456</code></li>
+                    <li>Secret Key: <code title="DEFAULT PASS. Does not works ofc :)">mysecret456</code></li>
                 </ul>
 
                 <p>
-                    When you log into <code style="color: #00ff88;">/admin.html</code>, it automatically generates
+                    When you log into <code style="color: #e4f2eb;">/admin.html</code>, it automatically generates
                     the hash for you. But if you need it for API calls, check the browser console after logging in,
                     or use the admin panel to make changes (which handles auth automatically).
                 </p>
@@ -611,7 +611,7 @@
                         <span class="code-label">Request</span>
                         <button class="copy" onclick="copy(this)">Copy</button>
                     </div>
-                    <pre><code>curl https://muaves-portfolio-api.onrender.com/api/projects</code></pre>
+                    <pre><code>curl https://core.muaves.com/api/projects</code></pre>
                 </div>
 
                 <div class="code-block">
@@ -667,7 +667,7 @@
                         <span class="code-label">Example</span>
                         <button class="copy" onclick="copy(this)">Copy</button>
                     </div>
-                    <pre><code>curl https://muaves-portfolio-api.onrender.com/api/projects/1</code></pre>
+                    <pre><code>curl https://core.muaves.com/api/projects/1</code></pre>
                 </div>
             </div>
 
@@ -755,7 +755,7 @@
                         <span class="code-label">Example</span>
                         <button class="copy" onclick="copy(this)">Copy</button>
                     </div>
-                    <pre><code>curl https://muaves-portfolio-api.onrender.com/api/search?q=launcher</code></pre>
+                    <pre><code>curl https://core.muaves.com/api/search?q=launcher</code></pre>
                 </div>
             </div>
 
@@ -805,7 +805,7 @@
                         <span class="code-label">Example</span>
                         <button class="copy" onclick="copy(this)">Copy</button>
                     </div>
-                    <pre><code>curl -X POST https://muaves-portfolio-api.onrender.com/api/projects \
+                    <pre><code>curl -X POST https://core.muaves.com/api/projects \
   -H "Content-Type: application/json" \
   -H "X-Auth-Hash: your-hash" \
   -d '{
@@ -848,7 +848,7 @@
                         <span class="code-label">Example</span>
                         <button class="copy" onclick="copy(this)">Copy</button>
                     </div>
-                    <pre><code>curl -X DELETE https://muaves-portfolio-api.onrender.com/api/projects/1 \
+                    <pre><code>curl -X DELETE https://core.muaves.com/api/projects/1 \
   -H "X-Auth-Hash: your-hash"</code></pre>
                 </div>
             </div>
